@@ -218,10 +218,5 @@ response = [
       RegistrationNumber: "2020-CS-99",
       Name:"Eman Muneeb",
       Status:"none"
-    },
-    {
-      RegistrationNumber: "2020-R\/2018-CS-79",
-      Name:"Haris Bajwa",
-      Status:"none"
     }
   ];
