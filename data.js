@@ -195,11 +195,6 @@ response = [
       Status:"none"
     },
     {
-      RegistrationNumber: "2020-CS-93",
-      Name:"Syed Bilal Hashmi",
-      Status:"none"
-    },
-    {
       RegistrationNumber: "2020-CS-95",
       Name:"Muhammad Ahmed",
       Status:"none"
