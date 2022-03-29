@@ -9,7 +9,7 @@
       crossorigin="anonymous"
     />
     <script src="data.js"></script>
-    <script src="html2pdf.bundle.min.js"></script>
+    <script src="html2pdf.js"></script>
   </head>
   <body>
     <div
@@ -33,15 +33,25 @@
         <option value="Operating System">Operating System</option>
         <option value="Differential Equation">Differential Equation</option>
       </select>
-      <div class="container" style="padding-top: 1%">
+      <div class="container d-inline-flex justify-content-center style="padding-top: 1%">
         <button
           id="download-button"
-          class="btn btn-dark col-12"
+          class="btn btn-outline-dark col-6"
           style="min-width: 200px"
           onclick="pdf()"
         >
-          Download
+          Download PDF
+        </button>  
+        <button
+
+          id="download-button-csv"
+          class="btn btn-outline-secondary col-6"
+          style="min-width: 200px"
+          
+        >
+          Download CSV
         </button>
+
       </div>
     </div>
 
@@ -59,6 +69,49 @@
     </table>
 
     <script type="text/javascript">
+
+
+
+        document.getElementById("download-button-csv").addEventListener("click", function () {
+          var html = document.querySelector("table").outerHTML;
+          htmlToCSV(html, "attendance.csv");
+        });
+
+      function htmlToCSV(html, filename) {
+        var data = [];
+        var rows = document.querySelectorAll("table tr");
+        data.push(",,,,,,,Subject:," + document.getElementById("course").value);
+        data.push(",,,,,,,Date:," + document.getElementById("date").value);
+        for (var i = 0; i < rows.length; i++) {
+          var row = [],
+            cols = rows[i].querySelectorAll(".name");
+
+          for (var j = 0; j < cols.length; j++) {
+            row.push(cols[j].innerText);
+          }
+          data.push(row.join(","));
+        }
+
+        downloadCSVFile(data.join("\n"), filename);
+      }
+
+      function downloadCSVFile(csv, filename) {
+        var csv_file, download_link;
+
+        csv_file = new Blob([csv], { type: "text/csv" });
+
+        download_link = document.createElement("a");
+
+        download_link.download = filename;
+
+        download_link.href = window.URL.createObjectURL(csv_file);
+
+        download_link.style.display = "none";
+
+        document.body.appendChild(download_link);
+
+        download_link.click();
+      }
       function generateTable() {
         
         let pCount = 0;
