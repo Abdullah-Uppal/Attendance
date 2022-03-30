@@ -8,6 +8,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+
     <script src="data.js"></script>
     <script src="html2pdf.js"></script>
   </head>
@@ -55,27 +56,25 @@
       </div>
     </div>
 
-    <table class="table table-striped table-hover table-responsive" id="table">
+    <table class="table table-striped table-hover table-responsive " id="table">
       <thead class="thead-dark">
         <tr>
           <th scope="col" class="name">Registration Number</th>
           <th scope="col" class="name">Name</th>
           <th scope="col" class="name">Status</th>
-          <th scope="col" onclick="presentClick()">Present</th>
-          <th scope="col" onclick="absentClick()">Absent</th>
+          <th scope="col" onclick="statusClick()"></th>
         </tr>
       </thead>
       <tbody></tbody>
     </table>
-                                                 <footer class="bg-dark text-center text-white">
+    <footer class="bg-dark text-center text-white">
         <!-- Copyright -->
         <div class="text-center p-3 " style="background-color: rgba(0, 0, 0, 0.2);">
           © 2022 Copyright:
-          &#128513; Itna to banta ha bro&#x1F609;
+          &#128513; Itna to banta ha bro &#x1F609;
         </div>
         <!-- Copyright -->
       </footer>
-
     <script type="text/javascript">
 
 
@@ -167,43 +166,33 @@
             i +
             '">' +
             response[i].Status +
-            '</td><td><input type="radio" class="radio - inline" id="present' +
+            '</td><td><input type="checkbox" class="form-check-input rounded-circle bg-dark" id="present' +
             i +
-            '" onchange="isPresentChecked(' +
-            i +
-            ')"/></td><td><input type="radio" class="radio - inline"id="absent' +
-            i +
-            '" onchange="isAbsentChecked(' +
+            '" onchange="isStatusChecked(' +
             i +
             ')"/></td></tr>';
         }
         table.innerHTML += rowData;
       }
-      function isPresentChecked(i) {
-        response[i].Status = "Present";
-        $("#status" + i + "").text("Present");
-        $("#absent" + i + "").prop("checked", false);
-      }
-      function isAbsentChecked(i) {
-        $("#status" + i + "").text("Absent");
-        $("#present" + i + "").prop("checked", false);
-        response[i].Status = "Absent";
-      }
+      function isStatusChecked(i) {
 
-      function presentClick() {
+        console.log($("#present" + i + "").is(":checked"));
+        if($("#present" + i + "").is(":checked")){
+            
+            response[i].Status = "Present";
+        $("#status" + i + "").text("Present");
+        }
+        else{
+            response[i].Status = "Absent";
+        $("#status" + i + "").text("Absent");
+         }
+        
+      }
+      function statusClick() {
         for (let i = 0; i < response.length; i++) {
           response[i].Status = "Present";
           $("#status" + i + "").text("Present");
           $("#present" + i + "").prop("checked", true);
-          $("#absent" + i + "").prop("checked", false);
-        }
-      }
-      function absentClick() {
-        for (let i = 0; i < response.length; i++) {
-          response[i].Status = "Absent";
-          $("#status" + i + "").text("Absent");
-          $("#absent" + i + "").prop("checked", true);
-          $("#present" + i + "").prop("checked", false);
         }
       }
       function pdf() {
