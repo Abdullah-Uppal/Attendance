@@ -168,6 +168,7 @@
         for (let i = 0; i < response.length; i++) {
           response[i].Status = "Present";
           $("#status" + i + "").text("Present");
+          $("#present" + i + "").style.display = "flex";
           $("#present" + i + "").prop("checked", true);
         }
       }else{
