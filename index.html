@@ -42,8 +42,6 @@
         <tr>
           <th scope="col" class="name" onclick="statusClick()">Registration Number</th>
           <th scope="col" class="name" onclick="statusClick()">Name</th>
-          <!-- <th scope="col" class="name">Status</th> -->
-          <!--<th scope="col" onclick="statusClick()">Mark All</th>-->
         </tr>
       </thead>
       <tbody></tbody>
@@ -138,45 +136,40 @@
       let table = document.getElementById("table");
 
       let rowData = "";
-      for (let i = 0; i < response.length; i++) {
-        rowData +=
-          '<tr><td class="name">' +
-          response[i].RegistrationNumber +
-          '</td><td class="name">' +
-          '<input type="checkbox" class="form-check-input rounded-circle bg-dark" id="present"+i+" style="display:none"/>       ' +
-          response[i].Name +
-          '</td></tr>';
-      }
+       for (let i = 0; i < response.length; i++) {
+          rowData +=
+            '<tr><td class="name" onclick="isStatusChecked('+i+')">' +
+            response[i].RegistrationNumber +
+            '</td><td class="name" onclick="isStatusChecked('+i+')"> ' +
+            '<input type="checkbox" class="form-check-input rounded-circle bg-dark" style="margin-right:9px;display:none;" id="status' +
+            i +
+            '"/>' +
+            response[i].Name +
+            "</td></tr>";
+        }
       table.innerHTML += rowData;
     }
     function isStatusChecked(i) {
 
-      console.log($("#present" + i + "").is(":checked"));
-      if ($("#present" + i + "").is(":checked")) {
-
-        response[i].Status = "Present";
-        $("#status" + i + "").text("Present");
-      }
-      else {
-        response[i].Status = "Absent";
-        $("#status" + i + "").text("Absent");
-      }
+     if(response[i].Status === "Absent"){
+            response[i].Status = "Present";
+            $("#status" + i).show() ;
+            $("#status" + i).prop("checked",true);
+            $("#status" + i).attr('disabled',true);
+        }
+        else{
+            response[i].Status = "Absent";
+            $("#status" + i).hide() ; 
+        }  
 
     }
     function statusClick() {
-      if ($("#present" + 0 + "").is("checked")) {
-        for (let i = 0; i < response.length; i++) {
-          response[i].Status = "Present";
-          $("#status" + i + "").text("Present");
-          $("#present" + i + "").style.display = "flex";
-          $("#present" + i + "").prop("checked", true);
-        }
-      }else{
-        for (let i = 0; i < response.length; i++) {
-          response[i].Status = "Absent";
-          $("#present" + i + "").prop("checked", false);
-        }
-      }
+      for (let i = 0; i < response.length; i++) {
+            response[i].Status = "Present";
+            $("#status" + i).show() ;
+            $("#status" + i).prop("checked",true);
+            $("#status" + i).attr('disabled',true);
+          }
 
     }
     function pdf() {
