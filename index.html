@@ -84,7 +84,7 @@
 
         document.getElementById("download-button-csv").addEventListener("click", function () {
           var html = document.querySelector("table").outerHTML;
-          htmlToCSV(html, "attendance.csv");
+          htmlToCSV(html, "Section-B-"+document.getElementById("date").value+".csv");
         });
 
       function htmlToCSV(html, filename) {
