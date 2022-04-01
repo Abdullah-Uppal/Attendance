@@ -200,7 +200,7 @@
       }
       function pdf() {
         const element = generateTable();
-        html2pdf(element);
+        html2pdf(element).save("abc-"+document.getElementById("date").value+".pdf");
       }
     </script>
     <script
