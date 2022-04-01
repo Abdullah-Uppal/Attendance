@@ -64,7 +64,7 @@
             <th scope="col" class="name">Registration Number</th>
             <th scope="col" class="name">Name</th>
             <th scope="col" class="name">Status</th>
-            <th scope="col" onclick="statusClick()">Mark All</th>
+            <!--<th scope="col" onclick="statusClick()">Mark All</th>-->
           </tr>
         </thead>
         <tbody></tbody>
@@ -140,6 +140,7 @@
          if(response[i].Status ==="Present"){
             rowData +=
             '<tr><td class="name">' +
+            '<input type="checkbox" class="form-check-input rounded-circle bg-dark" id="present"+i+" />'+
             response[i].RegistrationNumber +
             '</td><td class="name">' +
             response[i].Name +
@@ -169,11 +170,7 @@
             i +
             '">' +
             response[i].Status +
-            '</td><td><input type="checkbox" class="form-check-input rounded-circle bg-none" id="present' +
-            i +
-            '" onchange="isStatusChecked(' +
-            i +
-            ')"/></td></tr>';
+            '</td></tr>';
         }
         table.innerHTML += rowData;
       }
