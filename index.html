@@ -164,7 +164,7 @@
 
     }
     function statusClick() {
-      if(!$("#status").is(":checked")){
+      if($("#status").is(":checked") === false){
         alter("Yes");
         $("#status").prop("checked",true);
         for (let i = 0; i < response.length; i++) {
