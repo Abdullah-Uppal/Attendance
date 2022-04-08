@@ -40,7 +40,7 @@
     <table class="table table-striped table-hover table-responsive " style="user-select:none" id="table">
       <thead class="thead-dark">
         <tr>
-          <th scope="col" class="name" onclick="statusClick()"><input type="checkbox"  id="status"/>Registration Number</th>
+          <th scope="col" class="name" onclick="statusClick()">Registration Number</th>
           <th scope="col" class="name" onclick="statusClick()">Name</th>
         </tr>
       </thead>
@@ -164,17 +164,6 @@
 
     }
     function statusClick() {
-      if($("#status").is(":checked") === false){
-        alter("Yes");
-        $("#status").prop("checked",true);
-        for (let i = 0; i < response.length; i++) {
-            response[i].Status = "Present";
-            $("#status" + i).show() ;
-            $("#status" + i).prop("checked",true);
-            $("#status" + i).attr('disabled',true);
-          }
-
-      }
       for (let i = 0; i < response.length; i++) {
             response[i].Status = "Present";
             $("#status" + i).show() ;
