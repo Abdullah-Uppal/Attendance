@@ -138,9 +138,9 @@
       let rowData = "";
        for (let i = 0; i < response.length; i++) {
           rowData +=
-            '<tr><td class="name" onclick="isStatusChecked('+i+')">' +
+            '<tr><td class="name d-flex justify-content-center" onclick="isStatusChecked('+i+')">' +
             response[i].RegistrationNumber +
-            '<input type="checkbox" class="form-check-input rounded-circle bg-dark" style="margin-left:300px;display:none;" id="status' +
+            '<input type="checkbox" class="form-check-input rounded-circle bg-dark" style="display:none;" id="status' +
             i +
             '"/>' +
             '</td><td class="name" onclick="isStatusChecked('+i+')"> ' +
