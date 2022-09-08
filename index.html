@@ -8,23 +8,26 @@
 
   <script src="data.js"></script>
   <script src="html2pdf.bundle.min.js"></script>
+
 </head>
 
 <body>
   <div class="container p-2" >
-    <input type="date" name="" id="date" class="form-control" />
-    <select name="courses" id="course" class="form-control" style="margin-top: 1%">
-      <option value="Database System">Database System</option>
-      <option value="Theory of Automata">Theory of Automata</option>
-      <option value="Operating System">Operating System</option>
-      <option value="Differential Equation">Differential Equation</option>
-      <option value="Quran Translation">Quran Translation</option>
-    </select>
-    <div class="container d-inline-flex justify-content-center " style="margin-top: 1%">
+    <div class="d-flex align-items-center  p-1 flex-column gap-3">
+        <input type="date" name="" id="date" class="form-control" />
+        <select name="courses" id="course" class="form-control">
+          <option value="Software Engineering">SE</option>
+          <option value="Artificial Intelligence">AI</option>
+          <option value="Big Data Analysis">BDA</option>
+          <option value="Information Security">IS</option>
+          <option value="Professional Practice in Software Development">PPSD</option>
+        </select>
+    </div>
+    <div class="container d-inline-flex justify-content-evenly gap-3" style="margin-top: 1%">
       <button id="download-button" class="btn btn-outline-dark col-6" style="min-width: 200px" onclick="pdf()">
         Download PDF
       </button>
-      <button id="download-button-csv" class="btn btn-outline-secondary col-6" style="min-width: 200px">
+      <button id="download-button-csv" class="btn btn-outline-secondary col-6" style="min-width: 200px" onclick="csv()">
         Download CSV
       </button>
 
@@ -51,13 +54,15 @@
     <!-- Copyright -->
   </footer>
   <script type="text/javascript">
+     function getDate(){
+        return document.getElementById("date").value ? document.getElementById("date").value : new Date().toLocaleDateString()
+     }
+    function csv(){
+        var html = document.querySelector("table").outerHTML;
+        
+      htmlToCSV(html, "Section-B-" + getDate() + ".csv");
+    }
 
-
-
-    document.getElementById("download-button-csv").addEventListener("click", function () {
-      var html = document.querySelector("table").outerHTML;
-      htmlToCSV(html, "Section-B-" + document.getElementById("date").value + ".csv");
-    });
 
     function htmlToCSV(html, filename) {
       var data = [];
@@ -169,7 +174,7 @@
     }
     function pdf() {
       const element = generateTable();
-      html2pdf().from(element).save("Section-B-" + document.getElementById("date").value + ".pdf");
+      html2pdf().from(element).save("Section-B-" + getDate() + ".pdf");
     }
   </script>
   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
