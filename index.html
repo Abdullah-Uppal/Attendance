@@ -55,7 +55,7 @@
   </footer>
   <script type="text/javascript">
      function getDate(){
-        return document.getElementById("date").value ? document.getElementById("date").value : new Date().toLocaleDateString()
+        return document.getElementById("date").value ? document.getElementById("date").value : new Date().toLocaleDateString('en-GB').replaceAll('/','-')
      }
     function csv(){
         var html = document.querySelector("table").outerHTML;
@@ -68,7 +68,7 @@
       var data = [];
       var rows = document.querySelectorAll("table tr");
       data.push(",,,,,,,Subject:," + document.getElementById("course").value);
-      data.push(",,,,,,,Date:," + document.getElementById("date").value);
+      data.push(",,,,,,,Date:," + getDate());
       for (var i = 0; i < rows.length; i++) {
         var row = [],
           cols = rows[i].querySelectorAll(".name");
@@ -103,15 +103,18 @@
 
       let pCount = 0;
       let aCount = 0;
-      for (let i = 0; i < response.length; i++) {
-        if (response[i].Status === "Present") {
-          pCount++;
-        }
-        else {
-          aCount++;
-        }
-      }
-      let rowData = "<center><h2>" + document.getElementById("course").value + "</h2></br><h2>" + document.getElementById("date").value + "</h2></center>" + "<div class=\"d-inline-flex flex-row justify-content-between\"><h5>Total Students: <em style=\"color:Blue;\">" + response.length + "</em></h5><h5 style=\"margin-left:25px\">Present Students: <em style=\"color:lightBlue;\">" + pCount + "</em></h5><h5 style=\"margin-left:25px\">Absent Students: <em style=\"color:red;\">" + aCount + "</em></h5></div>" +
+      pCount = response.filter((res)=> res.Status ==== "Present").length
+      aCount = response.filter((res)=> res.Status ==== "Absent").length
+      
+//       for (let i = 0; i < response.length; i++) {
+//         if (response[i].Status === "Present") {
+//           pCount++;
+//         }
+//         else {
+//           aCount++;
+//         }
+//       }
+      let rowData = "<center><h2>" + document.getElementById("course").value + "</h2></br><h2>" + getDate() + "</h2></center>" + "<div class=\"d-inline-flex flex-row justify-content-between\"><h5>Total Students: <em style=\"color:Blue;\">" + response.length + "</em></h5><h5 style=\"margin-left:25px\">Present Students: <em style=\"color:lightBlue;\">" + pCount + "</em></h5><h5 style=\"margin-left:25px\">Absent Students: <em style=\"color:red;\">" + aCount + "</em></h5></div>" +
         "<table class=\"table \" id=\"table\"> <thead class=\"thead-dark\"> <tr><th scope=\"col\" class=\"name\">Registration Number</th><th scope=\"col\" class=\"name\">Name</th> <th scope=\"col\" class=\"name\">Status</th></tr></thead><tbody>";
       for (let i = 0; i < response.length; i++) {
         if (response[i].Status === "Present") {
