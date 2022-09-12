@@ -129,21 +129,21 @@ response = [
       Name:"Muhammad Usman Rasheed",
       Status:"none"
     },
-    {
-      RegistrationNumber: "2020-CS-80",
-      Name:"Hussain Shahzad",
-      Status:"none"
-    },
+//     {
+//       RegistrationNumber: "2020-CS-80",
+//       Name:"Hussain Shahzad",
+//       Status:"none"
+//     },
     {
       RegistrationNumber: "2020-CS-81",
       Name:"Hafiz Mohsin Raza",
       Status:"none"
     },
-    {
-      RegistrationNumber: "2020-CS-82",
-      Name:"Adeel Shabbir",
-      Status:"none"
-    },
+//     {
+//       RegistrationNumber: "2020-CS-82",
+//       Name:"Adeel Shabbir",
+//       Status:"none"
+//     },
     {
       RegistrationNumber: "2020-CS-83",
       Name:"Laibah Azhar",
