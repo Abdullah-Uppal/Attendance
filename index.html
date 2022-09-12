@@ -112,7 +112,7 @@
         }
       }
       let rowData = "<center><h2>" + $("#course").val() + "</h2></br><h2>" + getDate() + "</h2></center>" + "<div class=\"d-inline-flex flex-row justify-content-between\"><h5>Total Students: <em style=\"color:Blue;\">" + response.length + "</em></h5><h5 style=\"margin-left:25px\">Present Students: <em style=\"color:lightBlue;\">" + pCount + "</em></h5><h5 style=\"margin-left:25px\">Absent Students: <em style=\"color:red;\">" + aCount + "</em></h5></div>" +
-        "<table class=\"table  \" id=\"table\"> <thead class=\"thead-dark d-flex justify-content-evenly\"> <tr><th scope=\"col\" class=\"name\">Registration Number</th><th scope=\"col\" class=\"name\">Name</th></tr></thead><tbody class=\" d-flex justify-content-evenly\">";
+        "<table class=\"table  \" id=\"table\"> <thead class=\"thead-dark d-flex justify-content-evenly flex-column\"> <tr><th scope=\"col\" class=\"name\">Registration Number</th><th scope=\"col\" class=\"name\">Name</th></tr></thead><tbody class=\" d-flex justify-content-evenly flex-column\">";
       for (let i = 0; i < response.length; i++) {
         if (response[i].Status === "Present") {
           rowData +=
