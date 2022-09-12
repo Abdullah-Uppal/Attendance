@@ -124,12 +124,11 @@
         }
       }
       rowData += "</tbody></table>"
-      console.log(rowData);
       return rowData;
     }
     run();
     function run() {
-     
+     let table = document.getElementById("table");
       let rowData = "";
        for (let i = 0; i < response.length; i++) {
           rowData +=
@@ -142,7 +141,7 @@
             response[i].Name 
             "</td></tr>";
         }
-      $("#table").append(rowData);
+      table.innerHTML +=rowData;
     }
     function isStatusChecked(i) {
 
