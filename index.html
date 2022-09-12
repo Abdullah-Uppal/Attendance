@@ -55,7 +55,7 @@
   </footer>
   <script type="text/javascript">
      function getDate(){
-        return document.getElementById("date").value ? document.getElementById("date").value : new Date().toLocaleDateString('en-GB').replaceAll('/','-')
+        return $("#date").val() ? $("#date").val() : new Date().toLocaleDateString('en-GB').replaceAll('/','-')
      }
     function csv(){
         var html = document.querySelector("table").outerHTML;
@@ -111,8 +111,8 @@
           aCount++;
         }
       }
-      let rowData = "<center><h2>" + document.getElementById("course").value + "</h2></br><h2>" + getDate() + "</h2></center>" + "<div class=\"d-inline-flex flex-row justify-content-between\"><h5>Total Students: <em style=\"color:Blue;\">" + response.length + "</em></h5><h5 style=\"margin-left:25px\">Present Students: <em style=\"color:lightBlue;\">" + pCount + "</em></h5><h5 style=\"margin-left:25px\">Absent Students: <em style=\"color:red;\">" + aCount + "</em></h5></div>" +
-        "<table class=\"table \" id=\"table\"> <thead class=\"thead-dark\"> <tr><th scope=\"col\" class=\"name\">Registration Number</th><th scope=\"col\" class=\"name\">Name</th></tr></thead><tbody>";
+      let rowData = "<center><h2>" + $("#course").val() + "</h2></br><h2>" + getDate() + "</h2></center>" + "<div class=\"d-inline-flex flex-row justify-content-between\"><h5>Total Students: <em style=\"color:Blue;\">" + response.length + "</em></h5><h5 style=\"margin-left:25px\">Present Students: <em style=\"color:lightBlue;\">" + pCount + "</em></h5><h5 style=\"margin-left:25px\">Absent Students: <em style=\"color:red;\">" + aCount + "</em></h5></div>" +
+        "<table class=\"table d-flex justify-content-evenly \" id=\"table\"> <thead class=\"thead-dark\"> <tr><th scope=\"col\" class=\"name\">Registration Number</th><th scope=\"col\" class=\"name\">Name</th></tr></thead><tbody>";
       for (let i = 0; i < response.length; i++) {
         if (response[i].Status === "Present") {
           rowData +=
@@ -129,7 +129,7 @@
     }
     run();
     function run() {
-      let table = document.getElementById("table");
+      let table = $("#table");
 
       let rowData = "";
        for (let i = 0; i < response.length; i++) {
