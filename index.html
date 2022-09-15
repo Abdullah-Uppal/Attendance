@@ -19,7 +19,6 @@
         if(data){
             response = JSON.parse(data);
         }
-        console.log(response);
         run();
         $("#totalAbsent").html(response.filter((item) => item.Status === 'Absent').length);
         $("#totalPresent").html(response.filter((item) => item.Status === 'Present').length);
@@ -108,15 +107,6 @@
       data.push(",,,,,,,Date:," + getDate());
       data.push(",,,,,,,Total Present:," + document.getElementById("totalPresent").innerText);      
       data.push(",,,,,,,Total Absent:," + document.getElementById("totalAbsent").innerText);      
-    //   for (var i = 0; i < rows.length; i++) {
-    //     var row = [],
-    //       cols = rows[i].querySelectorAll(".name");
-
-    //     for (var j = 0; j < cols.length; j++) {
-    //       row.push(cols[j].innerText);
-    //     }
-    //     data.push(row.join(","));
-    //   }
         for (var i = 0; i < response.length; i++) {
             var row = [];
             row.push(response[i].RegistrationNumber + "," + response[i].Name + "," + response[i].Status[0]);
