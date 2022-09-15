@@ -11,7 +11,24 @@
 
   <script src="data.js"></script>
   <script src="html2pdf.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+  <script>
+        $(function(){
+        data = localStorage.getItem("data");
+        if(data){
+            response = JSON.parse(data);
+        }
+        console.log(response);
+        run();
+        $("#totalAbsent").html(response.filter((item) => item.Status === 'Absent').length);
+        $("#totalPresent").html(response.filter((item) => item.Status === 'Present').length);
+    });
+  </script>
   <style>
+    #table{
+        min-width: 300px;
+    }
     @media screen and (max-width: 390px) {
         tr,span{
              font-size:13px;
@@ -72,31 +89,39 @@
   </footer>
 
   <script type="text/javascript">
+
      function getDate(){
         return $("#date").val() ? $("#date").val() : new Date().toLocaleDateString('en-GB').replaceAll('/','-')
      }
     function csv(){
-        var html = document.querySelector("table").outerHTML;
-        
-      htmlToCSV(html, "Section-B-" + getDate() + ".csv");
+        // var html = document.querySelector("table").outerHTML;
+      localStorage.setItem("table", JSON.stringify(response));  
+      htmlToCSV("Section-B-" + getDate() + ".csv",response);
     }
 
 
-    function htmlToCSV(html, filename) {
+    function htmlToCSV(filename,response) {
+        console.log(response)
       var data = [];
       var rows = document.querySelectorAll("table tr");
       data.push(",,,,,,,Subject:," + document.getElementById("course").value);
       data.push(",,,,,,,Date:," + getDate());
-      for (var i = 0; i < rows.length; i++) {
-        var row = [],
-          cols = rows[i].querySelectorAll(".name");
+      data.push(",,,,,,,Total Present:," + document.getElementById("totalPresent").innerText);      
+      data.push(",,,,,,,Total Absent:," + document.getElementById("totalAbsent").innerText);      
+    //   for (var i = 0; i < rows.length; i++) {
+    //     var row = [],
+    //       cols = rows[i].querySelectorAll(".name");
 
-        for (var j = 0; j < cols.length; j++) {
-          row.push(cols[j].innerText);
+    //     for (var j = 0; j < cols.length; j++) {
+    //       row.push(cols[j].innerText);
+    //     }
+    //     data.push(row.join(","));
+    //   }
+        for (var i = 0; i < response.length; i++) {
+            var row = [];
+            row.push(response[i].RegistrationNumber + "," + response[i].Name + "," + response[i].Status[0]);
+            data.push(row.join(","));
         }
-        data.push(row.join(","));
-      }
-
       downloadCSVFile(data.join("\n"), filename);
     }
 
@@ -119,8 +144,8 @@
     }
     function generateTable() {
 
-       let aCount =  response.filter((item) => item.Status === 'Absent').length;
-       let pCount =response.filter((item) => item.Status === 'Present').length;
+       let aCount =  $("#totalAbsent").text();
+       let pCount =$("#totalPresent").text();
       let rowData = "<center><h2>" + $("#course").val() + "</h2></br><h2>" + getDate() + "</h2></center>" + "<div class=\"d-inline-flex flex-row justify-content-between\"><h5>Total Students: <em style=\"color:Blue;\">" + response.length + "</em></h5><h5 style=\"margin-left:25px\">Present Students: <em style=\"color:lightBlue;\">" + pCount + "</em></h5><h5 style=\"margin-left:25px\">Absent Students: <em style=\"color:red;\">" + aCount + "</em></h5></div>" +
         "<table class=\"table  \" id=\"table\"> <thead class=\"thead-dark\"> <tr><th scope=\"col\" class=\"name\">Registration Number</th><th scope=\"col\" class=\"name\">Name</th></tr></thead><tbody>";
       for (let i = 0; i < response.length; i++) {
@@ -136,15 +161,17 @@
       rowData += "</tbody></table>"
       return rowData;
     }
-    run();
+    
     function run() {
+        
      let table = document.getElementById("table");
       let rowData = "";
        for (let i = 0; i < response.length; i++) {
+        status =  response[i].Status === "Present" ? '<input type="checkbox" class="form-check-input rounded-circle bg-dark" checked disabled id="status' :
+            '<input type="checkbox" class="form-check-input rounded-circle bg-dark" style="display:none;" id="status'
           rowData +=
             '<tr><td class="name d-flex justify-content-between" onclick="isStatusChecked('+i+')">' +
-            response[i].RegistrationNumber +
-            '<input type="checkbox" class="form-check-input rounded-circle bg-dark" style="display:none;" id="status' +
+            response[i].RegistrationNumber + status +
             i +
             '"/>' +
             '</td><td class="name " onclick="isStatusChecked('+i+')"> ' +
@@ -169,22 +196,35 @@
         $("#totalPresent").html(response.filter((item) => item.Status === 'Present').length);
     }
     function statusClick() {
-      for (let i = 0; i < response.length; i++) {
+        if(response.filter((item) => item.Status === 'Present').length === 41){
+            
+            for (let i = 0; i < response.length; i++) {
+            response[i].Status = "Absent";
+            $("#status" + i).hide() ;
+            $("#status" + i).prop("checked",false);
+            $("#status" + i).attr('disabled',true);
+          }
+        }
+        else{
+                  for (let i = 0; i < response.length; i++) {
             response[i].Status = "Present";
             $("#status" + i).show() ;
             $("#status" + i).prop("checked",true);
             $("#status" + i).attr('disabled',true);
           }
-          $("#totalAbsent").html(response.filter((item) => item.Status === 'Absent').length);
+  
+        }
+
+        $("#totalAbsent").html(response.filter((item) => item.Status === 'Absent').length);
         $("#totalPresent").html(response.filter((item) => item.Status === 'Present').length);
     }
     function pdf() {
+      localStorage.setItem("data", JSON.stringify(response));  
       const element = generateTable();
       html2pdf().from(element).save("Section-B-" + getDate() + ".pdf");
     }
   </script>
-  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-    crossorigin="anonymous"></script>
+
 </body>
 
 </html>
