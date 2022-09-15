@@ -119,11 +119,11 @@ response = [
       Name:"Hafiz Rehan",
       Status:"Absent"
     },
-    {
-      RegistrationNumber: "2020-CS-77",
-      Name:"Taha Hussain Zain",
-      Status:"Absent"
-    },
+    // {
+    //   RegistrationNumber: "2020-CS-77",
+    //   Name:"Taha Hussain Zain",
+    //   Status:"Absent"
+    // },
     {
       RegistrationNumber: "2020-CS-79",
       Name:"Muhammad Usman Rasheed",

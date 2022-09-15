@@ -26,7 +26,7 @@
         });
     </script>
     <style>
-        .table {
+        .t {
             min-width: 300px;
             border-radius: 5px 5px 0 0;
             overflow: hidden;
@@ -34,11 +34,11 @@
 
         }
 
-        .table thead tr {
+        .t thead tr {
             background-color: #009879;
         }
 
-        .table tbody tr {
+        .t tbody tr {
             box-shadow: 0 0 1px #868585;
         }
 
@@ -76,7 +76,7 @@
         </div>
     </div>
     <div class="container">
-        <table class="container-fluid  table  table-hover" style="user-select:none" id="table">
+        <table class="table t table-hover" style="user-select:none" id="table">
             <thead>
                 <tr>
                     <th class="name" onclick="statusClick()">Registration Number</th>
@@ -128,15 +128,6 @@
             data.push(",,,,,,,Date:," + getDate());
             data.push(",,,,,,,Total Present:," + document.getElementById("totalPresent").innerText);
             data.push(",,,,,,,Total Absent:," + document.getElementById("totalAbsent").innerText);
-            //   for (var i = 0; i < rows.length; i++) {
-            //     var row = [],
-            //       cols = rows[i].querySelectorAll(".name");
-
-            //     for (var j = 0; j < cols.length; j++) {
-            //       row.push(cols[j].innerText);
-            //     }
-            //     data.push(row.join(","));
-            //   }
             for (var i = 0; i < response.length; i++) {
                 var row = [];
                 row.push(response[i].RegistrationNumber + "," + response[i].Name + "," + response[i].Status[0]);
@@ -175,7 +166,7 @@
                 "</em></h5><h5 style=\"margin-left:25px\">Present Students: <em style=\"color:lightBlue;\">" + pCount +
                 "</em></h5><h5 style=\"margin-left:25px\">Absent Students: <em style=\"color:red;\">" + aCount +
                 "</em></h5></div>" +
-                "<table class=\"table  \" id=\"table\"> <thead class=\"thead-dark\"> <tr><th scope=\"col\" class=\"name\">Registration Number</th><th scope=\"col\" class=\"name\">Name</th></tr></thead><tbody>";
+                "<table class=\"table  \" id=\"table\"> <thead> <tr><th scope=\"col\" class=\"name\">Registration Number</th><th scope=\"col\" class=\"name\">Name</th></tr></thead><tbody>";
             for (let i = 0; i < response.length; i++) {
                 if (response[i].Status === "Present") {
                     rowData +=
