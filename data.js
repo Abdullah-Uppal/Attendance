@@ -64,11 +64,11 @@ response = [
       Name:"Ahtisham Ul Haq",
       Status:"Absent"
     },
-    {
-      RegistrationNumber: "2020-CS-66",
-      Name:"Ayesha Shabbir",
-      Status:"Absent"
-    },
+    // {
+    //   RegistrationNumber: "2020-CS-66",
+    //   Name:"Ayesha Shabbir",
+    //   Status:"Absent"
+    // },
     {
       RegistrationNumber: "2020-CS-67",
       Name:"Aysha javaid",
