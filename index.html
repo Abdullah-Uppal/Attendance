@@ -112,7 +112,9 @@
         function getDate() {
             return $("#date").val() ? $("#date").val() : new Date().toLocaleDateString('en-GB').replaceAll('/', '-')
         }
-
+        function getCourse(){
+            return $("#course").val()
+        }
         function csv() {
             // var html = document.querySelector("table").outerHTML;
             localStorage.setItem("table", JSON.stringify(response));
@@ -242,7 +244,7 @@
         function pdf() {
             localStorage.setItem("data", JSON.stringify(response));
             const element = generateTable();
-            html2pdf().from(element).save("Section-B-" + getDate() + ".pdf");
+            html2pdf().from(element).save("Section-B-"+getCourse()+'-' + getDate() + ".pdf");
         }
     </script>
 
